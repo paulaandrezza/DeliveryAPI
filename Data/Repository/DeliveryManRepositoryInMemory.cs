@@ -5,29 +5,25 @@ namespace Data.Repository
 {
     public class DeliveryManRepositoryInMemory : IDeliveryManRepository
     {
-        public int AddDeliveryMan(DeliveryMan deliveryMan)
+        private readonly List<DeliveryMan> _deliveryMen = new List<DeliveryMan>();
+        public void AddDeliveryMan(DeliveryMan deliveryMan)
         {
-            throw new NotImplementedException();
+            _deliveryMen.Add(deliveryMan);
         }
 
-        public void DeleteDeliveryMan(int id)
+        public void DeleteDeliveryMan(DeliveryMan deliveryMan)
         {
-            throw new NotImplementedException();
+            _deliveryMen.Remove(deliveryMan);
         }
 
         public IEnumerable<DeliveryMan> GetAllDeliveryMen()
         {
-            throw new NotImplementedException();
+            return _deliveryMen;
         }
 
         public DeliveryMan GetDeliveryManById(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public int UpdateDeliveryMan(int id, DeliveryMan deliveryMan)
-        {
-            throw new NotImplementedException();
+            return _deliveryMen.FirstOrDefault(deliveryMan => deliveryMan.Id == id);
         }
     }
 }
