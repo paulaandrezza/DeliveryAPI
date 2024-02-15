@@ -13,10 +13,10 @@ namespace DeliveryAPI.RequestModels.DeliveryMan
         [Required]
         public string Phone { get; set; }
         [Required]
-        public VehicleType VehicleType { get; set; }
+        public VehicleType? VehicleType { get; set; }
         [Required]
         public string VehiclePlateNumber { get; set; }
         [Required]
-        public double DailyRate { get; set; }
+        public double? DailyRate { get; set; }
     }
 }

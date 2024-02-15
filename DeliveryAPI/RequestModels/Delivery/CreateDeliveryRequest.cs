@@ -1,13 +1,19 @@
 ﻿using DeliveryAPI.Data.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace DeliveryAPI.RequestModels.Delivery
 {
     public class CreateDeliveryRequest
     {
+        [Required]
         public string RecipientName { get; set; }
+        [Required]
         public string DestinationAddress { get; set; }
-        public DateTime OrderDate { get; set; }
-        public DateTime DeliveryDate { get; set; }
-        public DeliveryStatus Status { get; set; }
+        [Required]
+        public DateTime? OrderDate { get; set; }
+        [Required]
+        public DateTime? DeliveryDate { get; set; }
+        [Required]
+        public DeliveryStatus? Status { get; set; }
     }
 }
