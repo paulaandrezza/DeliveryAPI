@@ -1,7 +1,7 @@
 ﻿# Overview do DeliveryAPI 🚚
 
 O DeliveryAPI é uma API desenvolvida para gerenciar entregas e entregadores em um sistema de delivery.
-Este projeto é uma atividade do módulo de Programação Web II (ASP.NET MVC / WEB AP) do curso Diversedev na Ada tech, com o objetivo de treinar o uso de endpoints, middlewares e filtros.
+Este projeto é uma atividade do módulo de Programação Web II (ASP.NET MVC / WEB AP) do curso Diversedev na Ada tech, com o objetivo de treinar o uso de endpoints e filtros.
 
 ## Funcionalidades Principais 🛠️
 
