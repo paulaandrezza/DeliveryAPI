@@ -52,8 +52,16 @@ namespace DeliveryAPI.Controllers
         }
 
         [HttpGet(Name = "GetAllDeliveryMen")]
-        public IActionResult GetAllDeliveryMen()
+        public IActionResult GetAllDeliveryMen([FromQuery] string? deliveryManCPF = null)
         {
+            if (deliveryManCPF != null)
+            {
+                DeliveryMan deliveryMan = _deliveryManRepository.GetDeliveryManByCPF(deliveryManCPF);
+                if (deliveryMan == null)
+                    return NotFound($"The delivery man with CPF {deliveryManCPF} was not found.");
+                return Ok(deliveryMan);
+            }
+
             return Ok(_deliveryManRepository.GetAllDeliveryMen());
         }
 
