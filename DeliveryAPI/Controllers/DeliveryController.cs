@@ -64,5 +64,14 @@ namespace DeliveryAPI.Controllers
 
             return Ok(delivery);
         }
+
+        [HttpGet("Exception", Name = "TestException")]
+        public IActionResult TestException([FromQuery] bool error)
+        {
+            if (error)
+                throw new Exception("This is a test exception from the DeliveryController");
+
+            return Ok();
+        }
     }
 }
