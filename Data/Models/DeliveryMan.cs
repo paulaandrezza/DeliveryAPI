@@ -12,6 +12,7 @@ namespace DeliveryAPI.Data
         }
         public int Id { get; set; }
         public string Name { get; set; }
+        public string CPF { get; set; }
         public string Phone { get; set; }
         public VehicleType VehicleType { get; set; }
         public string VehiclePlateNumber { get; set; }

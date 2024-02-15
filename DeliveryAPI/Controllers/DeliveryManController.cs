@@ -24,6 +24,7 @@ namespace DeliveryAPI.Controllers
             DeliveryMan deliveryMan = new DeliveryMan
             {
                 Name = deliveryManRequest.Name,
+                CPF = deliveryManRequest.CPF,
                 Phone = deliveryManRequest.Phone,
                 VehicleType = deliveryManRequest.VehicleType,
                 VehiclePlateNumber = deliveryManRequest.VehiclePlateNumber,
@@ -58,6 +59,15 @@ namespace DeliveryAPI.Controllers
             DeliveryMan deliveryMan = _deliveryManRepository.GetDeliveryManById(deliveryManId);
             if (deliveryMan == null)
                 return NotFound($"The delivery man with ID {deliveryManId} was not found.");
+            return Ok(deliveryMan);
+        }
+
+        [HttpGet("bycpf/{deliveryManCPF}", Name = "GetDeliveryManByCPF")]
+        public IActionResult GetDeliveryManByCPF([FromRoute] string deliveryManCPF)
+        {
+            DeliveryMan deliveryMan = _deliveryManRepository.GetDeliveryManByCPF(deliveryManCPF);
+            if (deliveryMan == null)
+                return NotFound($"The delivery man with CPF {deliveryManCPF} was not found.");
             return Ok(deliveryMan);
         }
 

@@ -21,6 +21,11 @@ namespace Data.Repository
             return _deliveryMen;
         }
 
+        public DeliveryMan GetDeliveryManByCPF(string cpf)
+        {
+            return _deliveryMen.FirstOrDefault(deliveryMan => deliveryMan.CPF == cpf);
+        }
+
         public DeliveryMan GetDeliveryManById(int id)
         {
             return _deliveryMen.FirstOrDefault(deliveryMan => deliveryMan.Id == id);

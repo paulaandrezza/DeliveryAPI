@@ -8,6 +8,9 @@ namespace DeliveryAPI.RequestModels.DeliveryMan
         [Required]
         public string Name { get; set; }
         [Required]
+        [MinLength(11)]
+        public string CPF { get; set; }
+        [Required]
         public string Phone { get; set; }
         [Required]
         public VehicleType VehicleType { get; set; }
