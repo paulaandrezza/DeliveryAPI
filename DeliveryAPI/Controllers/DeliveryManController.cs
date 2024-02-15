@@ -1,6 +1,6 @@
 ﻿using Data.Repository.Interface;
 using DeliveryAPI.Data;
-using DeliveryAPI.RequestModels;
+using DeliveryAPI.RequestModels.DeliveryMan;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryAPI.Controllers
@@ -9,18 +9,19 @@ namespace DeliveryAPI.Controllers
     [Route("api/[controller]")]
     public class DeliveryManController : ControllerBase
     {
-
+        private readonly IDeliveryRepository _deliveryRepository;
         private readonly IDeliveryManRepository _deliveryManRepository;
 
-        public DeliveryManController(IDeliveryManRepository deliveryManRepository)
+        public DeliveryManController(IDeliveryRepository deliveryRepository, IDeliveryManRepository deliveryManRepository)
         {
+            _deliveryRepository = deliveryRepository;
             _deliveryManRepository = deliveryManRepository;
         }
 
         [HttpPost(Name = "AddDeliveryMan")]
-        public IActionResult AddDeliveryMan(CreateDeliveryManRequest deliveryManRequest)
+        public IActionResult AddDeliveryMan([FromBody] CreateDeliveryManRequest deliveryManRequest)
         {
-            var deliveryMan = new DeliveryMan
+            DeliveryMan deliveryMan = new DeliveryMan
             {
                 Name = deliveryManRequest.Name,
                 Phone = deliveryManRequest.Phone,
@@ -30,15 +31,15 @@ namespace DeliveryAPI.Controllers
             };
 
             _deliveryManRepository.AddDeliveryMan(deliveryMan);
-            return CreatedAtRoute("GetDeliveryManById", new { id = deliveryMan.Id }, "Created successfully");
+            return CreatedAtRoute("GetDeliveryManById", new { deliveryManId = deliveryMan.Id }, "Created successfully");
         }
 
-        [HttpDelete("{id}", Name = "DeleteDeliveryMan")]
-        public IActionResult DeleteDeliveryMan(int id)
+        [HttpDelete("{deliveryManId}", Name = "DeleteDeliveryMan")]
+        public IActionResult DeleteDeliveryMan([FromRoute] int deliveryManId)
         {
-            DeliveryMan deliveryMan = _deliveryManRepository.GetDeliveryManById(id);
+            DeliveryMan deliveryMan = _deliveryManRepository.GetDeliveryManById(deliveryManId);
             if (deliveryMan == null)
-                return NotFound($"The delivery man with ID {id} was not found.");
+                return NotFound($"The delivery man with ID {deliveryManId} was not found.");
 
             _deliveryManRepository.DeleteDeliveryMan(deliveryMan);
             return Ok("DeliveryMan deleted successfully.");
@@ -51,13 +52,23 @@ namespace DeliveryAPI.Controllers
             return Ok(_deliveryManRepository.GetAllDeliveryMen());
         }
 
-        [HttpGet("{id}", Name = "GetDeliveryManById")]
-        public IActionResult GetDeliveryManById(int id)
+        [HttpGet("{deliveryManId}", Name = "GetDeliveryManById")]
+        public IActionResult GetDeliveryManById([FromRoute] int deliveryManId)
         {
-            DeliveryMan deliveryMan = _deliveryManRepository.GetDeliveryManById(id);
+            DeliveryMan deliveryMan = _deliveryManRepository.GetDeliveryManById(deliveryManId);
             if (deliveryMan == null)
-                return NotFound($"The delivery man with ID {id} was not found.");
+                return NotFound($"The delivery man with ID {deliveryManId} was not found.");
             return Ok(deliveryMan);
+        }
+
+        [HttpGet("deliveries/{deliveryManId}", Name = "GetAllDeliveriesFromADeliveryMan")]
+        public IActionResult GetAllDeliveriesFromADeliveryMan([FromRoute] int deliveryManId)
+        {
+            DeliveryMan deliveryMan = _deliveryManRepository.GetDeliveryManById(deliveryManId);
+            if (deliveryMan == null)
+                return NotFound($"The delivery man with ID {deliveryManId} was not found.");
+
+            return Ok(_deliveryRepository.GetAllDeliveriesFromADeliveryMan(deliveryMan));
         }
     }
 }
