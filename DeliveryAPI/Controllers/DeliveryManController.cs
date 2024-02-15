@@ -1,6 +1,6 @@
 ﻿using Data.Repository.Interface;
 using DeliveryAPI.Data;
-using DeliveryAPI.RequestModels.DeliveryMan;
+using DeliveryAPI.RequestModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryAPI.Controllers

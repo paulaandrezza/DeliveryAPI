@@ -1,7 +1,7 @@
 ﻿using DeliveryAPI.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 
-namespace DeliveryAPI.RequestModels.Delivery
+namespace DeliveryAPI.RequestModels
 {
     public class CreateDeliveryRequest
     {
