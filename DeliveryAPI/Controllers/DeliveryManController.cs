@@ -1,12 +1,16 @@
 ﻿using Data.Repository.Interface;
 using DeliveryAPI.Data;
+using DeliveryAPI.Filters;
 using DeliveryAPI.RequestModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DeliveryAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [TypeFilter(typeof(AuthorizationFilter))]
+    [Authorize]
     public class DeliveryManController : ControllerBase
     {
         private readonly IDeliveryRepository _deliveryRepository;
