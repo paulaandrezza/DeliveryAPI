@@ -25,6 +25,9 @@ namespace DeliveryAPI.Controllers
         [HttpPost(Name = "AddDeliveryMan")]
         public IActionResult AddDeliveryMan([FromBody] CreateDeliveryManRequest deliveryManRequest)
         {
+            if (_deliveryManRepository.GetDeliveryManByCPF(deliveryManRequest.CPF) != null)
+                return Conflict("CPF already exists");
+
             DeliveryMan deliveryMan = new DeliveryMan
             {
                 Name = deliveryManRequest.Name,
